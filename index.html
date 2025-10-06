@@ -26,27 +26,56 @@
             class="logo"
           />
         </div>
-        <div class="menu">
-          <i class="fa-solid fa-bars"></i>
+        <div class="nav__links">
+          <a href="#" class="link__hover-effect">Home</a>
+          <a href="" class="link__blue link__hover-effect">Find Your Crypto</a>
+          <a href="mailto:jacobpoole84@gmail.com" target="_blank" class="contact">Contact</a>
+        </div>
+        <button class="btn__menu" onclick="openMenu()" aria-label="Open menu" aria-expanded="false">
+          <span class="hamburger" aria-hidden="true">
+            <span class="bar bar1"></span>
+            <span class="bar bar2"></span>
+            <span class="bar bar3"></span>
+          </span>
+        </button>
+        <div class="menu__backdrop">
+          <button class="btn__menu menu__close" onclick="closeMenu()">
+            <i class="icon fa-solid fa-xmark"></i>
+          </button>
+          <ul class="menu__links">
+            <li class="menu__list">
+              <a href="#" class="menu__link" onclick="closeMenu()">Home</a>
+            </li>
+            <li class="menu__list">
+              <a href="" class="menu__link" onclick="closeMenu()">Search Your Crypto</a>
+            </li>
+            <li class="menu__list">
+              <a href="mailto:jacobpoole84@gmail.com" target="_blank" class="menu__link" onclick="closeMenu()">Contact</a>
+            </li>
+          </ul>
         </div>
       </div>
     </header>
-    <section class="landing__page">
+    <section id="landing__page">
       <div class="title">
-        <h1>The best cryptocurrency search platform in the world</h1>
+        <h1>The best cryptocurrency search platform</h1>
       </div>
       <div class="sub-title">
-        <h2>FIND YOUR CRYPTO BY MARKET CAP</h2>
+        <h2>FIND YOUR <span class="black">CRYPTO</span> BY MARKET CAP</h2>
       </div>
       <div class="input__wrapper">
         <input type="text" placeholder="Search by Coin Name or Symbol" />
-        <button></button>
+        <button class="btn__search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </div>
-      <img
-        src="./assets/cryptocurrency-blockchain-smart-city-digital-futuristic-concept-vector-illustration-260228391.jpg"
-        alt=""
-        class="city"
-      />
+      <figure class="img__wrapper">
+        <img
+          src="./assets/cryptocurrency-blockchain-smart-city-digital-futuristic-concept-vector-illustration-260228391.jpg"
+          alt=""
+          class="city"
+        />
+      </figure>
     </section>
   </body>
 </html>
