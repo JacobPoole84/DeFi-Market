@@ -22,6 +22,8 @@ header {
     display: flex;
     align-items: center;
     flex-direction: column;
+    position: relative;
+    min-height: 420px; 
 }
 
 .nav__row {
@@ -111,7 +113,7 @@ header {
     left: 0;
     right: 0;
     height: 4px;
-    background: black;
+    background: white;
     border-radius: 2px;
     transition: transform 300ms cubic-bezier(.2,.9,.2,1), opacity 200ms ease, top 300ms cubic-bezier(.2,.9,.2,1);
 }
@@ -137,20 +139,28 @@ header {
 }
 
 .menu__backdrop {
-    position: absolute;
+    position: fixed;
     background-color: hsla(0, 0%, 100%, .97);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 100;
+    inset: 0;
+    margin-bottom: 100px;
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: all 400ms ease-in;
     visibility: hidden;
     transform: translateX(110%);
+    transition: all 400ms ease-in;
+}
+
+.menu--open .menu__backdrop {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+.menu--open .input-wrap {
+    display: none;
 }
 
 .fa-bars:active, .fa-xmark:active {
@@ -165,12 +175,6 @@ header {
 @keyframes spin-once {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-.menu--open .menu__backdrop {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(0%);
 }
 
 .menu--open .fa-bars {
@@ -241,6 +245,7 @@ input {
 }
 
 .search-wrapper {
+    color: black;
     position: absolute;
     cursor: pointer;
     top: 10px;
@@ -255,6 +260,27 @@ input {
 .search-wrapper:hover {
     color: rgb(114, 117, 204);
 }
+
+
+/* background layer that covers header */
+.background-img {
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background-image: url('https://static.vecteezy.com/system/resources/previews/001/846/151/non_2x/cryptocurrency-stock-chart-light-futuristic-banner-background-free-vector.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* put header content above background */
+header .nav__row,
+header .content__wrapper {
+  position: relative;
+  z-index: 1;
+  color: white; /* or add text-shadow for contrast */
+}
+
 
 /* Smaller Sizes */
 
