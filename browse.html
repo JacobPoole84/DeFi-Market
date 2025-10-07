@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crypto Marketplace</title>
     <link
       rel="icon"
@@ -13,10 +13,11 @@
       src="https://kit.fontawesome.com/3919f5a8d1.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="browse.css">
+    <link rel="stylesheet" href="browse.css" />
     <script src="index.js"></script>
-</head>
-<body>
+    <script src="browse.js"></script>
+  </head>
+  <body>
     <header class="navbar">
       <div class="nav__row">
         <div class="logo">
@@ -27,11 +28,21 @@
           />
         </div>
         <div class="nav__links">
-          <a href="#" class="link__hover-effect">Home</a>
-          <a href="" class="link__blue link__hover-effect">Find Your Crypto</a>
-          <a href="mailto:jacobpoole84@gmail.com" target="_blank" class="contact">Contact</a>
+          <a href="index.html" class="link__hover-effect">Home</a>
+          <a href="#" class="link__hover-effect">Find Your Crypto</a>
+          <a
+            href="mailto:jacobpoole84@gmail.com"
+            target="_blank"
+            class="contact"
+            >Contact</a
+          >
         </div>
-        <button class="btn__menu" onclick="openMenu()" aria-label="Open menu" aria-expanded="false">
+        <button
+          class="btn__menu"
+          onclick="openMenu()"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
           <span class="hamburger" aria-hidden="true">
             <span class="bar bar1"></span>
             <span class="bar bar2"></span>
@@ -44,13 +55,23 @@
           </button>
           <ul class="menu__links">
             <li class="menu__list">
-              <a href="index.html" class="menu__link" onclick="closeMenu()">Home</a>
+              <a href="index.html" class="menu__link" onclick="closeMenu()"
+                >Home</a
+              >
             </li>
             <li class="menu__list">
-              <a href="./browse.html" class="menu__link" onclick="closeMenu()">Search Your Crypto</a>
+              <a href="./browse.html" class="menu__link" onclick="closeMenu()"
+                >Search Your Crypto</a
+              >
             </li>
             <li class="menu__list">
-              <a href="mailto:jacobpoole84@gmail.com" target="_blank" class="menu__link" onclick="closeMenu()">Contact</a>
+              <a
+                href="mailto:jacobpoole84@gmail.com"
+                target="_blank"
+                class="menu__link"
+                onclick="closeMenu()"
+                >Contact</a
+              >
             </li>
           </ul>
         </div>
@@ -58,15 +79,24 @@
       <div class="content__wrapper">
         <h1>Browse Your Coin</h1>
         <div class="input-wrap">
-            <input type="text" placeholder="Search">
-            <div class="search-wrapper">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
+          <input type="text" placeholder="Search" />
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
         </div>
       </div>
-      <div class="background-img">
-        
-      </div>
+      <div class="background-img"></div>
     </header>
-</body>
+    <section class="search">
+      <div
+        class="progress-inline"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      >
+        <div class="progress-inline__fill"></div>
+      </div>
+    </section>
+  </body>
 </html>
