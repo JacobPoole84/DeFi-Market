@@ -303,11 +303,32 @@ input {
     display: flex;
     justify-content: center;
     width: 100%;
+    position: relative;
 }
 
 img {
     max-width: 100%;
     height: auto;
+}
+
+.coin__img {
+    height: 30vh;
+    transform: translateX(250%);
+    animation: SlideInRotate 1000ms ease;
+}
+
+.coin__wrapper {
+    position: absolute;
+    bottom: 0;
+}
+
+@keyframes SlideInRotate {
+    0% {
+        transform: translateX(250%) rotate(0deg);
+    }
+    100% {
+        transform: translateX(0) rotate(-360deg);
+    }
 }
 
 /* Smaller Sizes */

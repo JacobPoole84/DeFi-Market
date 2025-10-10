@@ -97,6 +97,46 @@
       >
         <div class="progress-inline__fill"></div>
       </div>
+      <div class="filter__wrapper">
+        <h1 class="search__info">Search Results:</h1>
+        <div class="price__filter">
+          <h2>Price Range:</h2>
+          <div class="slider__wrapper">
+            <div class="range-values">
+              <span id="minPriceLabel">$700M</span>
+              <span id="maxPriceLabel">$30B</span>
+            </div>
+            <div class="range-slider">
+              <!-- two overlapping range inputs for dual-handle effect -->
+              <input
+                id="rangeMin"
+                class="range"
+                type="range"
+                min="700"
+                max="30000"
+                value="700"
+                step="100"
+              />
+              <input
+                id="rangeMax"
+                class="range"
+                type="range"
+                min="700"
+                max="30000"
+                value="30000"
+                step="100"
+              />
+              <div class="track"></div>
+              <div class="track-selected" id="trackSelected"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="coins">
+        <div class="content__wrapper">
+            
+        </div>
+      </div>
     </section>
   </body>
 </html>

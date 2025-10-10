@@ -58,6 +58,7 @@ window.addEventListener('load', () => {
     if (!root) return
     const fill = root.querySelector('.progress-inline__fill')
     if (!fill) return
+    
 
     const duration = 1600 // ms
     const start = performance.now()
@@ -87,4 +88,56 @@ window.addEventListener('load', () => {
     // kickoff
     setInlineProgress(0, root)
     requestAnimationFrame(step)
+})
+
+// Price range slider logic (separate init so it runs reliably)
+document.addEventListener('DOMContentLoaded', () => {
+    const minInput = document.getElementById('rangeMin')
+    const maxInput = document.getElementById('rangeMax')
+    const trackSelected = document.getElementById('trackSelected')
+    const minLabel = document.getElementById('minPriceLabel')
+    const maxLabel = document.getElementById('maxPriceLabel')
+    if (!minInput || !maxInput || !trackSelected) return
+
+    const MIN = 700    // represents $700M
+    const MAX = 30000  // represents $30,000M = $30B
+
+    function clampValues() {
+        let minVal = Math.min(Number(minInput.value), Number(maxInput.value) - 100)
+        let maxVal = Math.max(Number(maxInput.value), Number(minInput.value) + 100)
+        // enforce bounds
+        minVal = Math.max(MIN, Math.min(MAX, minVal))
+        maxVal = Math.max(MIN, Math.min(MAX, maxVal))
+        minInput.value = minVal
+        maxInput.value = maxVal
+        return { minVal, maxVal }
+    }
+
+    function updateTrack() {
+        const { minVal, maxVal } = clampValues()
+        const range = MAX - MIN
+        const leftPct = ((minVal - MIN) / range) * 100
+        const rightPct = ((maxVal - MIN) / range) * 100
+        trackSelected.style.left = leftPct + '%'
+        trackSelected.style.width = (rightPct - leftPct) + '%'
+        minLabel.textContent = formatPrice(minVal)
+        maxLabel.textContent = formatPrice(maxVal)
+    }
+
+    function formatPrice(valueInM) {
+        // valueInM is in millions; show $700M or $2.5B etc
+        if (valueInM >= 1000) {
+            const billions = (valueInM / 1000)
+            // format with up to one decimal if necessary
+            return '$' + (billions % 1 === 0 ? String(billions) : billions.toFixed(1)) + 'B'
+        }
+        return '$' + valueInM + 'M'
+    }
+
+    // wire events
+    minInput.addEventListener('input', updateTrack)
+    maxInput.addEventListener('input', updateTrack)
+
+    // initial render
+    updateTrack()
 })

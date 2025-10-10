@@ -305,6 +305,119 @@ header .content__wrapper {
   transition: width 300ms ease;
 }
 
+/* Price range slider styles */
+.slider__wrapper {
+    width: 100%;
+    max-width: 700px;
+}
+.range-values {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+.range-slider {
+    position: relative;
+    height: 36px;
+}
+
+.menu--open .range-slider {
+    display: none;
+}
+.range-slider .track,
+.range-slider .track-selected {
+    position: absolute;
+    height: 6px;
+    top: 70%; /* lower the track so handles sit above it */
+    transform: translateY(-50%);
+    border-radius: 6px;
+}
+.range-slider .track {
+    left: 0;
+    right: 0;
+    background: #e6e6e6;
+    z-index: 1;
+}
+.range-slider .track-selected {
+    background: linear-gradient(90deg,#6b6bf7,#8b62d9);
+    left: 0;
+    width: 0;
+    z-index: 2;
+}
+.range-slider input.range {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: transparent;
+    pointer-events: none; /* let the thumb handle pointer events only */
+    z-index: 3;
+}
+.range-slider input.range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #6b6bf7;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    pointer-events: auto;
+    cursor: pointer;
+    transform: translateY(-50%); /* place thumb vertically centered in the input area */
+}
+.range-slider input.range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #6b6bf7;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    pointer-events: auto;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+.range-slider input.range::-webkit-slider-runnable-track { background: transparent }
+.range-slider input.range::-moz-range-track { background: transparent }
+
+/* ensure min handle is on top when overlapping */
+#rangeMin { 
+    padding: 10px 0 0 0;
+    z-index: 4 }
+#rangeMax { 
+    padding: 10px 0 0 0;
+    z-index: 3 }
+
+.filter__wrapper {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search__info {
+    font-size: 28px;
+    padding: 20px 0;
+    margin: 0;
+}
+
+.purple {
+    color: #6b6bf7;
+}
+
+.price__filter {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    min-width: 335px;
+}
+
+h2 {
+    font-size: 20px;
+    text-align: center;
+}
 
 
 /* Smaller Sizes */
