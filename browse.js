@@ -1,3 +1,24 @@
+async function main() {
+    const coin = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+    const coinData = await coin.json()
+    const coinContainerEl = document.querySelector('.coin__container')
+    coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+}
+
+main()
+
+function coinHTML(coin) {
+    return  `<div class="coin-info">
+        <div class="coin-info__container">
+            <h3>${coin.name}</h3>
+            <p><b>Symbol:</b> ${coin.symbol}</p>
+            <p><b>Rank:</b> ${coin.market_cap_rank}</p>
+            <p><b>Price:</b> $${coin.current_price}</p>
+        </div>
+        <img src="${coin.image}" alt="">
+    </div>`
+}
+
 function openMenu() {
     // open menu
     document.body.classList.add('menu--open')
@@ -99,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxLabel = document.getElementById('maxPriceLabel')
     if (!minInput || !maxInput || !trackSelected) return
 
-    const MIN = 700    // represents $700M
-    const MAX = 30000  // represents $30,000M = $30B
+    const MIN = 0    // represents $700M
+    const MAX = 150000  // represents $30,000M = $30B
 
     function clampValues() {
         let minVal = Math.min(Number(minInput.value), Number(maxInput.value) - 100)

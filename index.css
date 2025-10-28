@@ -313,22 +313,47 @@ img {
 
 .coin__img {
     height: 30vh;
-    transform: translateX(250%);
-    animation: SlideInRotate 1000ms ease;
+    display: block;
 }
 
+/* Position wrapper offscreen to the right by default, center when active */
 .coin__wrapper {
     position: absolute;
-    bottom: 0;
+    bottom: 10%;
+    left: 120%; /* start offscreen right */
+    transform: translateX(-50%);
+    transition: left 1000ms cubic-bezier(.2,.9,.2,1);
+    z-index: 60;
 }
 
-@keyframes SlideInRotate {
-    0% {
-        transform: translateX(250%) rotate(0deg);
-    }
-    100% {
-        transform: translateX(0) rotate(-360deg);
-    }
+/* move wrapper to center and keep it there when slide-in class is present */
+.slide-in-rotate .coin__wrapper {
+    left: 50%;
+}
+
+/* rotate the coin while it moves in; keep final rotated state */
+.slide-in-rotate .coin__img {
+    animation: coin-rotate-in 1000ms ease forwards;
+}
+
+@keyframes coin-rotate-in {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-720deg); }
+}
+
+/* slide out to the left when slide-out class is present */
+.slide-out-rotate .coin__wrapper {
+    left: -20%;
+    transition: left 900ms cubic-bezier(.2,.9,.2,1);
+}
+
+.slide-out-rotate .coin__img {
+    animation: coin-rotate-out 900ms ease forwards;
+}
+
+@keyframes coin-rotate-out {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-720deg); }
 }
 
 /* Smaller Sizes */

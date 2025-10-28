@@ -63,12 +63,15 @@
       <div class="sub-title">
         <h2>FIND YOUR <span class="black">CRYPTO</span> BY MARKET CAP</h2>
       </div>
-      <div class="input__wrapper">
-        <input type="text" placeholder="Search by Coin Name or Symbol"/>
-        <button class="btn__search">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </div>
+      <form class="search__form" action="">
+        <div class="input__wrapper">
+          <input type="text" placeholder="Search by Coin Name or Symbol" onclick="SlideInRotate()"/>
+          <button class="btn__search">
+            <i id="loading" class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+
       <figure class="img__wrapper">
         <img
           src="./assets/cryptocurrency-blockchain-smart-city-digital-futuristic-concept-vector-illustration-260228391.jpg"

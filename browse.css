@@ -419,6 +419,27 @@ h2 {
     text-align: center;
 }
 
+.coin__container {
+    border: 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.coin-info {
+    margin: 16px;
+    width: 25%;
+    display: flex;
+    justify-content: space-around;
+}
+
+img {
+    margin: 8px;
+    width: 80px;
+    height: 80px;
+}
+
 
 /* Smaller Sizes */
 

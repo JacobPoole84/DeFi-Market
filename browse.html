@@ -103,8 +103,8 @@
           <h2>Price Range:</h2>
           <div class="slider__wrapper">
             <div class="range-values">
-              <span id="minPriceLabel">$700M</span>
-              <span id="maxPriceLabel">$30B</span>
+              <span id="minPriceLabel">$0</span>
+              <span id="maxPriceLabel">$150,000</span>
             </div>
             <div class="range-slider">
               <!-- two overlapping range inputs for dual-handle effect -->
@@ -112,18 +112,18 @@
                 id="rangeMin"
                 class="range"
                 type="range"
-                min="700"
-                max="30000"
-                value="700"
+                min="0"
+                max="150000"
+                value="0"
                 step="100"
               />
               <input
                 id="rangeMax"
                 class="range"
                 type="range"
-                min="700"
-                max="30000"
-                value="30000"
+                min="0"
+                max="150000"
+                value="150000"
                 step="100"
               />
               <div class="track"></div>
@@ -132,9 +132,17 @@
           </div>
         </div>
       </div>
-      <div id="coins">
-        <div class="content__wrapper">
-            
+      <div class="coin__container">
+        <div class="coin__row">
+          <div class="coin-info">
+            <div class="coin-info__container">
+              <h3>Coin Name</h3>
+              <p><b>Symbol:</b> BTC</p>
+              <p><b>Rank:</b> 1</p>
+              <p><b>Price:</b> $22B</p>
+            </div>
+            <img src="https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400" alt="">
+          </div>
         </div>
       </div>
     </section>

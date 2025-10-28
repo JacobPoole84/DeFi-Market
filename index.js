@@ -43,3 +43,24 @@ function closeMenu() {
         openerIcon.addEventListener('animationend', cleanup)
     }
 }
+
+function SlideInRotate() {
+    document.body.classList.add('slide-in-rotate')
+    // ensure any slide-out is removed
+    document.body.classList.remove('slide-out-rotate')
+}
+
+function SlideOutRotate() {
+    // add slide-out and remove slide-in so coin moves left
+    document.body.classList.remove('slide-in-rotate')
+    document.body.classList.add('slide-out-rotate')
+}
+
+// wire the search button to slide out
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.input__wrapper .btn__search')
+    if (btn) btn.addEventListener('click', (e) => {
+        e.preventDefault()
+        SlideOutRotate()
+    })
+})
