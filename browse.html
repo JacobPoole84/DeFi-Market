@@ -14,8 +14,6 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="browse.css" />
-    <script src="index.js"></script>
-    <script src="browse.js"></script>
   </head>
   <body>
     <header class="navbar">
@@ -79,9 +77,9 @@
       <div class="content__wrapper">
         <h1>Browse Your Coin</h1>
         <div class="input-wrap">
-          <input type="text" placeholder="Search" />
+          <input type="text" id="search-details" placeholder="Search"/>
           <div class="search-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-magnifying-glass" onclick="renderCoin()"></i>
           </div>
         </div>
       </div>
@@ -100,36 +98,14 @@
       <div class="filter__wrapper">
         <h1 class="search__info">Search Results:</h1>
         <div class="price__filter">
-          <h2>Price Range:</h2>
-          <div class="slider__wrapper">
-            <div class="range-values">
-              <span id="minPriceLabel">$0</span>
-              <span id="maxPriceLabel">$150,000</span>
-            </div>
-            <div class="range-slider">
-              <!-- two overlapping range inputs for dual-handle effect -->
-              <input
-                id="rangeMin"
-                class="range"
-                type="range"
-                min="0"
-                max="150000"
-                value="0"
-                step="100"
-              />
-              <input
-                id="rangeMax"
-                class="range"
-                type="range"
-                min="0"
-                max="150000"
-                value="150000"
-                step="100"
-              />
-              <div class="track"></div>
-              <div class="track-selected" id="trackSelected"></div>
-            </div>
-          </div>
+          <h2>Coin Sort:</h2>
+          <select id="filter" onchange="filterCoins(event)">
+            <option value="" diabled selected></option>
+            <option value="NAME_SORT">Sort by Name</option>
+            <option value="SYMBOL_SORT">Sort by Symbol</option>
+            <option value="RANK_SORT">Sort by Rank</option>
+            <option value="PRICE_SORT">Sort by Price</option>
+          </select>
         </div>
       </div>
       <div class="coin__container">
@@ -146,5 +122,7 @@
         </div>
       </div>
     </section>
+    <script src="browse.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>

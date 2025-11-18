@@ -1,19 +1,87 @@
 
+const textInput = document.getElementById('search-details')
+const coinContainerEl = document.querySelector('.coin__container')
 
 
-async function main() {
-    const coin = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+async function renderCoin(filter) {
+    const searchValue = textInput.value.trim()
+    const coin = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${searchValue}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
     const coinData = await coin.json()
-    const coinContainerEl = document.querySelector('.coin__container')
     coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+
+    if (filter === 'NAME_SORT') {
+        coinData.sort((a, b) => a.name.localeCompare(b.name))
+        coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+    } else if (filter === 'SYMBOL_SORT') {
+        coinData.sort((a, b) => a.symbol.localeCompare(b.symbol))
+        coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+    } else if (filter === 'RANK_SORT') {
+        coinData.sort((a, b) => a.market_cap_rank - b.market_cap_rank)
+        coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+    } else if (filter === 'PRICE_SORT') {
+        coinData.sort((a, b) => b.current_price - a.current_price)
+        coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+    }
+
+    // const match = coinData.find((coin) => coin.symbol === searchValue || coin.id === searchValue)
+
 }
-main()
+
+renderCoin()
+
+function filterCoins(event) {
+        renderCoin(event.target.value)
+}
+
+// async function renderCoin() {
+//   const searchValue = textInput.value.trim()
+// //   if (!searchValue) return
+
+// //   try {
+//     // 1️⃣ Fetch all coins list (name, symbol, id)
+//     const listResponse = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd")
+//     const allCoins = await listResponse.json()
+
+//     // 2️⃣ Try to find by symbol first (BTC → bitcoin)
+//     const match =
+//       allCoins.find(
+//         (coin) =>
+//           coin.symbol === searchValue ||
+//           coin.id === searchValue
+//       ) || null
+
+//     // if (!match) {
+//     //   coinContainerEl.innerHTML = `<p>No coin found for "${searchValue}".</p>`;
+//     //   return
+//     // }
+
+//     // 3️⃣ Fetch coin market data using the matched ID
+//     const marketResponse = await fetch(
+//       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${match.id}&order=market_cap_desc&per_page=6&page=1&sparkline=false`
+//     )
+
+//     const coinData = await marketResponse.json()
+//     coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join("")
+//     }
+
+//   catch (err) {
+//     console.error("Error fetching coin:", err)
+//     coinContainerEl.innerHTML = `<p>Error fetching data. Please try again later.</p>`
+//   }
+// }
+
+    textInput.addEventListener('keyup', e => {
+        e.preventDefault()
+        if (e.key === "Enter") {
+            renderCoin()
+        }
+    })
 
 function coinHTML(coin) {
     return  `<div class="coin-info">
         <div class="coin-info__container">
             <h3>${coin.name}</h3>
-            <p><b>Symbol:</b> ${coin.symbol}</p>
+            <p><b>Symbol:</b> <span class="uppercase">${coin.symbol}</span></p>
             <p><b>Rank:</b> ${coin.market_cap_rank}</p>
             <p><b>Price:</b> $${coin.current_price}</p>
         </div>
