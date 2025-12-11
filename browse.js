@@ -7,7 +7,7 @@ async function renderCoin(filter) {
     const searchValue = textInput.value.trim()
     const coin = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${searchValue}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
     const coinData = await coin.json()
-    coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+    coinContainerEl.innerHTML = coinData.slice(0, 6).map((coin) => coinHTML(coin)).join('')
 
     if (filter === 'NAME_SORT') {
         coinData.sort((a, b) => a.name.localeCompare(b.name))
