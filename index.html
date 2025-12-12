@@ -63,10 +63,10 @@
       <div class="sub-title">
         <h2>FIND YOUR <span class="black">CRYPTO</span> BY MARKET CAP</h2>
       </div>
-      <form class="search__form" action="browse.html">
+      <form class="search__form" action="browse.html" method="get">
         <div class="input__wrapper">
-          <input type="search" id="search-details" placeholder="Search or Leave Blank for All" onclick="SlideInRotate()"/>
-          <button class="btn__search" type="submit">
+          <input type="search" name="search" id="search-details" placeholder="Search or Leave Blank for All" onclick="SlideInRotate()"/>
+          <button class="btn__search" type="submit" onclick="sendSearch()">
               <i id="loading" class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>

@@ -3,6 +3,9 @@ const textInput = document.getElementById('search-details')
 const coinContainerEl = document.querySelector('.coin__container')
 const searchSuggestion = document.querySelector('.search__suggestion')
 
+const params = new URLSearchParams(window.location.search);
+const searchValue = params.get("search");
+
 
 async function renderCoin(filter) {
     const searchValue = textInput.value.trim()
@@ -212,4 +215,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // initial render
     updateTrack()
+})
+
+// If the browse page was opened with a search query, populate the input and run the search
+document.addEventListener('DOMContentLoaded', () => {
+    if (searchValue && searchValue.trim().length > 0) {
+        textInput.value = searchValue
+        renderCoin()
+    }
 })

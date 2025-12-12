@@ -1,3 +1,8 @@
+function sendSearch() {
+  const input = document.getElementById("search-details").value;
+  window.location.href = `browse.html?search=${encodeURIComponent(input)}`;
+}
+
 function openMenu() {
     // open menu
     document.body.classList.add('menu--open')
