@@ -306,7 +306,7 @@ header .content__wrapper {
 }
 
 .menu--open {
-    display: none;
+    /* display: none; */
 }
 }
 .range-slider input.range {

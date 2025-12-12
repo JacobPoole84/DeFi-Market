@@ -1,33 +1,42 @@
 
 const textInput = document.getElementById('search-details')
 const coinContainerEl = document.querySelector('.coin__container')
+const searchSuggestion = document.querySelector('.search__suggestion')
 
 
 async function renderCoin(filter) {
     const searchValue = textInput.value.trim()
+
+    if (searchValue.length > 0) {
+        searchSuggestion.style.display = 'none'
+    } else {
+        searchSuggestion.style.display = 'block'
+        searchSuggestion.innerHTML = 'Please provide a valid search value.'
+        return
+    }
+
     const coin = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${searchValue}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
     const coinData = await coin.json()
     coinContainerEl.innerHTML = coinData.slice(0, 6).map((coin) => coinHTML(coin)).join('')
 
     if (filter === 'NAME_SORT') {
         coinData.sort((a, b) => a.name.localeCompare(b.name))
-        coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+        coinContainerEl.innerHTML = coinData.slice(0, 6).map((coin) => coinHTML(coin)).join('')
     } else if (filter === 'SYMBOL_SORT') {
         coinData.sort((a, b) => a.symbol.localeCompare(b.symbol))
-        coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+        coinContainerEl.innerHTML = coinData.slice(0, 6).map((coin) => coinHTML(coin)).join('')
     } else if (filter === 'RANK_SORT') {
         coinData.sort((a, b) => a.market_cap_rank - b.market_cap_rank)
-        coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+        coinContainerEl.innerHTML = coinData.slice(0, 6).map((coin) => coinHTML(coin)).join('')
     } else if (filter === 'PRICE_SORT') {
         coinData.sort((a, b) => b.current_price - a.current_price)
-        coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join('')
+        coinContainerEl.innerHTML = coinData.slice(0, 6).map((coin) => coinHTML(coin)).join('')
     }
 
     // const match = coinData.find((coin) => coin.symbol === searchValue || coin.id === searchValue)
 
 }
 
-renderCoin()
 
 function filterCoins(event) {
         renderCoin(event.target.value)
