@@ -11,7 +11,7 @@ async function renderCoin(filter) {
     const searchValue = textInput.value.trim()
 
     if (searchValue.length === 0) {
-        // Always render the empty-state message inside the results container
+        //  render the empty-state message inside the results container
         coinContainerEl.innerHTML = `<div class="coin__row"><h1 class="search__suggestion">Please provide a valid search value.</h1></div>`
         return
     }

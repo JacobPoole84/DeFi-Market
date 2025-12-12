@@ -1,5 +1,9 @@
 function sendSearch() {
   const input = document.getElementById("search-details").value;
+    if (!input || input.trim().length === 0) {
+        // if empty, do not proceed
+        return;
+    }
   window.location.href = `browse.html?search=${encodeURIComponent(input)}`;
 }
 
