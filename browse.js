@@ -7,16 +7,29 @@ const searchSuggestion = document.querySelector('.search__suggestion')
 async function renderCoin(filter) {
     const searchValue = textInput.value.trim()
 
-    if (searchValue.length > 0) {
-        searchSuggestion.style.display = 'none'
-    } else {
-        searchSuggestion.style.display = 'block'
-        searchSuggestion.innerHTML = 'Please provide a valid search value.'
+    if (searchValue.length === 0) {
+        // Always render the empty-state message inside the results container
+        coinContainerEl.innerHTML = `<div class="coin__row"><h1 class="search__suggestion">Please provide a valid search value.</h1></div>`
         return
     }
 
-    const coin = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${searchValue}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
-    const coinData = await coin.json()
+    // Fetch all coins market data (large list)
+    const coin = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false`)
+    const allCoins = await coin.json()
+    
+    // Filter by partial match (name or symbol, case-insensitive)
+    const searchLower = searchValue.toLowerCase()
+    const coinData = allCoins.filter(c => 
+        c.name.toLowerCase().includes(searchLower) || 
+        c.symbol.toLowerCase().includes(searchLower)
+    )
+    
+    if (coinData.length === 0) {
+        // show a clear "no results" message inside the results container
+        coinContainerEl.innerHTML = `<div class="coin__row"><h1 class="search__suggestion">No coins found matching "${searchValue}".</h1></div>`
+        return
+    } 
+    
     coinContainerEl.innerHTML = coinData.slice(0, 6).map((coin) => coinHTML(coin)).join('')
 
     if (filter === 'NAME_SORT') {
@@ -32,52 +45,11 @@ async function renderCoin(filter) {
         coinData.sort((a, b) => b.current_price - a.current_price)
         coinContainerEl.innerHTML = coinData.slice(0, 6).map((coin) => coinHTML(coin)).join('')
     }
-
-    // const match = coinData.find((coin) => coin.symbol === searchValue || coin.id === searchValue)
-
 }
-
 
 function filterCoins(event) {
         renderCoin(event.target.value)
 }
-
-// async function renderCoin() {
-//   const searchValue = textInput.value.trim()
-// //   if (!searchValue) return
-
-// //   try {
-//     // 1️⃣ Fetch all coins list (name, symbol, id)
-//     const listResponse = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd")
-//     const allCoins = await listResponse.json()
-
-//     // 2️⃣ Try to find by symbol first (BTC → bitcoin)
-//     const match =
-//       allCoins.find(
-//         (coin) =>
-//           coin.symbol === searchValue ||
-//           coin.id === searchValue
-//       ) || null
-
-//     // if (!match) {
-//     //   coinContainerEl.innerHTML = `<p>No coin found for "${searchValue}".</p>`;
-//     //   return
-//     // }
-
-//     // 3️⃣ Fetch coin market data using the matched ID
-//     const marketResponse = await fetch(
-//       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${match.id}&order=market_cap_desc&per_page=6&page=1&sparkline=false`
-//     )
-
-//     const coinData = await marketResponse.json()
-//     coinContainerEl.innerHTML = coinData.map((coin) => coinHTML(coin)).join("")
-//     }
-
-//   catch (err) {
-//     console.error("Error fetching coin:", err)
-//     coinContainerEl.innerHTML = `<p>Error fetching data. Please try again later.</p>`
-//   }
-// }
 
     textInput.addEventListener('keyup', e => {
         e.preventDefault()
