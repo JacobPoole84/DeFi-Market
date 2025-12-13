@@ -414,8 +414,8 @@ h3 {
 
 img {
     margin: 8px;
-    width: 80px;
-    height: 80px;
+    width: 50%;
+    height: 50%;
 }
 
 
@@ -428,5 +428,9 @@ img {
 
     .nav__links {
         display: none;
+    }
+
+    .coin-info {
+        width: 45%;
     }
 }
